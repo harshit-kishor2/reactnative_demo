@@ -24,6 +24,27 @@ export const initialAuthState = authAdapter.getInitialState({
 });
 
 /**
+ * For Check Auth
+ */
+export const checkAuthAction = createAsyncThunk(
+  'auth/checkAuthAction',
+  async (params, thunkAPI) => {
+    try {
+      const token = await AsyncStorage.getItem('@token');
+      const isRemember = await AsyncStorage.getItem('@isRemember');
+      if (token && isRemember === 'true') {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response ? error.response?.data : error.message,
+      );
+    }
+  },
+);
+
+/**
  * For Registration
  */
 export const registerAction = createAsyncThunk(
@@ -56,6 +77,12 @@ export const loginAction = createAsyncThunk(
         method: 'POST',
         data: params,
       });
+      if (params.isRemember) {
+        AsyncStorage.setItem('@isRemember', 'true');
+      } else {
+        AsyncStorage.setItem('@isRemember', 'false');
+      }
+
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -99,6 +126,18 @@ export const authSlice = createSlice({
   },
   extraReducers: builder => {
     builder
+      //Check Auth
+      .addCase(checkAuthAction.pending, state => {
+        state.loadingStatus = 'loading';
+      })
+      .addCase(checkAuthAction.fulfilled, (state, action) => {
+        state.loadingStatus = 'loaded';
+        state.isLoggedin = action.payload;
+      })
+      .addCase(checkAuthAction.rejected, (state, action) => {
+        state.loadingStatus = 'error';
+        state.loginError = action.payload || action.error.message;
+      })
       //login
       .addCase(loginAction.pending, state => {
         state.loginLoadingStatus = 'loading';

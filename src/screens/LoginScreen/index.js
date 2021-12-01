@@ -1,19 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useFormik } from 'formik';
-import React from 'react';
-import LoginScreenComponent from './LoginScreenComponent';
-import { loginSchema } from '../../utils/validationSchema';
-import { Container } from '../../components';
+import React, { useEffect } from 'react';
 import Toast from 'react-native-simple-toast';
 import { useDispatch } from 'react-redux';
-import { RouteName } from '../../constants';
+import { Container } from '../../components';
 import { loginAction } from '../../redux/auth.slice';
+import { loginSchema } from '../../utils/validationSchema';
+import LoginScreenComponent from './LoginScreenComponent';
+import { useIsFocused } from '@react-navigation/native';
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
+
   const formik = useFormik({
     validationSchema: loginSchema,
     initialValues: { username: '', password: '', isRemember: false },
-    onSubmit: value => {
+    onSubmit: (value, { resetForm }) => {
       let data = {
         username: value.username,
         password: value.password,
@@ -22,9 +25,16 @@ const LoginScreen = ({ navigation }) => {
         if (res.type === 'auth/loginAction/rejected') {
           Toast.show('Some Error Occured.');
         }
+        resetForm();
       });
     },
   });
+
+  useEffect(() => {
+    if (isFocused) {
+      formik.resetForm();
+    }
+  }, [isFocused]);
 
   return (
     <Container>

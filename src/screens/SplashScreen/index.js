@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import SplashScreenComponent from './SplashComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkAuthAction } from '../../redux/auth.slice';
 
 const SplashScreen = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAppLoaded, setIsAppLoaded] = useState(false);
   const { isLoggedin } = useSelector(state => state.authReducer);
+  const dispatch = useDispatch();
 
-  const getUser = async () => {
+  /*   const getUser = async () => {
     try {
       const token = await AsyncStorage.getItem('@token');
-      if (token) {
+      const isRemember = await AsyncStorage.getItem('@isRemember');
+      if (token && isRemember) {
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);
@@ -19,17 +22,17 @@ const SplashScreen = () => {
     } catch (error) {
       setIsAuthenticated(false);
     }
-  };
+  }; */
 
   useEffect(() => {
-    getUser();
+    dispatch(checkAuthAction());
     setTimeout(() => {
       setIsAppLoaded(true);
-    }, 2000);
+    }, 4000);
   }, [isLoggedin]);
   return (
     <SplashScreenComponent
-      isAuthenticated={isAuthenticated}
+      isAuthenticated={isLoggedin}
       isAppLoaded={isAppLoaded}
     />
   );

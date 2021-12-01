@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {
   Checkbox,
@@ -9,9 +9,11 @@ import {
 } from '../../components';
 import { ImageConst, RouteName } from '../../constants';
 import { hp } from '../../utils/utils';
+import Icons from '../../components/common/Icons';
 
 const LoginScreenComponent = ({ formik, navigation }) => {
   const password = useRef(null);
+  const [hidePass, setHidePass] = useState(true);
   const {
     handleChange,
     handleBlur,
@@ -31,6 +33,9 @@ const LoginScreenComponent = ({ formik, navigation }) => {
       </View>
       <View style={styles.box2}>
         <TextField
+          value={values.username}
+          icon={<Icons type="fontisto" size={17} name="user-secret" />}
+          iconPosition="right"
           style={styles.inputStyle}
           name="username"
           placeholder="Enter your username"
@@ -46,11 +51,21 @@ const LoginScreenComponent = ({ formik, navigation }) => {
         />
         <Spacer height={10} />
         <TextField
+          value={values.password}
+          icon={
+            <Icons
+              onPress={() => setHidePass(!hidePass)}
+              type="octicon"
+              size={17}
+              name={hidePass ? 'eye-closed' : 'eye'}
+            />
+          }
+          iconPosition="right"
           refKey={password}
           style={styles.inputStyle}
           name="password"
           placeholder="Enter your password"
-          secureTextEntry
+          secureTextEntry={hidePass}
           autoCapitalize="none"
           returnKeyType="go"
           returnKeyLabel="go"
@@ -64,7 +79,7 @@ const LoginScreenComponent = ({ formik, navigation }) => {
           value={values?.isRemember}
           onValueChange={newValue => setFieldValue('isRemember', newValue)}
           // style={styles.checkbox}
-          label={'Remeber me?'}
+          label={'Remember me?'}
         />
         <Spacer height={10} />
         <SubmitButton
@@ -77,7 +92,7 @@ const LoginScreenComponent = ({ formik, navigation }) => {
           <Text>Need a new account ? </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate(RouteName.REGISTRATION)}>
-            <Text style={styles.registerText}>Registartion</Text>
+            <Text style={styles.registerText}>Registration</Text>
           </TouchableOpacity>
         </View>
       </View>
