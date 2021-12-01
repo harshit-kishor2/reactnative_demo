@@ -1,17 +1,21 @@
 import React from 'react';
 import {
-  Image,
   Alert,
-  TouchableOpacity,
+  Image,
   SafeAreaView,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
-import { Images, RouteName } from '../../constants';
+import { Icons } from '../../components';
+import { ImageConst, RouteName } from '../../constants';
 import styles from './styles';
-import { Icon, Container } from '../../components';
+import { useDispatch } from 'react-redux';
+import { logoutAction } from '../../redux/auth.slice';
+import Toast from 'react-native-simple-toast';
 
-const SideMenu = ({ navigation, authDispatch }) => {
+const SideMenu = ({ navigation }) => {
+  const dispatch = useDispatch();
   const handleLogout = () => {
     navigation.toggleDrawer();
     Alert.alert('Logout!', 'Are you sure you want to logout?', [
@@ -22,32 +26,31 @@ const SideMenu = ({ navigation, authDispatch }) => {
 
       {
         text: 'OK',
-        onPress: () => {},
+        onPress: () => {
+          dispatch(logoutAction()).then(res => {
+            if (res.type === 'auth/loginAction/rejected') {
+              Toast.show('Some Error Occured.');
+            }
+          });
+        },
       },
     ]);
   };
 
   const menuItems = [
     {
-      icon: <Icon type="fontisto" size={17} name="player-settings" />,
-      name: 'Dashboard',
-      onPress: () => {
-        navigation.navigate(RouteName.DASHBOARD);
-      },
-    },
-    {
-      icon: <Icon type="material" size={17} name="logout" />,
+      icon: <Icons type="material" size={17} name="logout" />,
       name: 'Logout',
       onPress: handleLogout,
     },
   ];
   return (
     <SafeAreaView>
-      <Container>
+      <View>
         <Image
           height={70}
           width={70}
-          source={Images.LOGO}
+          source={ImageConst.LOGO}
           style={styles.logoImage}
         />
 
@@ -59,7 +62,7 @@ const SideMenu = ({ navigation, authDispatch }) => {
             </TouchableOpacity>
           ))}
         </View>
-      </Container>
+      </View>
     </SafeAreaView>
   );
 };

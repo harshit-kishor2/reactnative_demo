@@ -1,8 +1,7 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Screen from '../screens';
-import {RouteName} from '../constants';
-import {NavigationContainer} from '@react-navigation/native';
+import { RouteName } from '../constants';
 
 const HomeNavigator = () => {
   const HomeStack = createNativeStackNavigator();
@@ -11,7 +10,7 @@ const HomeNavigator = () => {
   const horizontalAnimation = {
     gestureDirection: 'horizontal',
     headerShown: false,
-    cardStyleInterpolator: ({current, layouts}) => {
+    cardStyleInterpolator: ({ current, layouts }) => {
       return {
         cardStyle: {
           transform: [
@@ -28,16 +27,14 @@ const HomeNavigator = () => {
   };
 
   return (
-    <NavigationContainer>
-      <HomeStack.Navigator
-        screenOptions={horizontalAnimation}
-        initialRouteName={RouteName.DASHBOARD}>
-        <HomeStack.Screen
-          name={RouteName.DASHBOARD}
-          component={Screen.DashboardScreen}
-        />
-      </HomeStack.Navigator>
-    </NavigationContainer>
+    <HomeStack.Navigator
+      screenOptions={horizontalAnimation}
+      initialRouteName={RouteName.DASHBOARD}>
+      <HomeStack.Screen
+        name={RouteName.DASHBOARD}
+        component={Screen.DashboardScreen}
+      />
+    </HomeStack.Navigator>
   );
 };
 

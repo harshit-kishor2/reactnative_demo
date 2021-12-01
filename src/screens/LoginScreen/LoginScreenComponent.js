@@ -1,17 +1,14 @@
 import React, { useRef } from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+  Checkbox,
+  KeyboardScrollView,
+  Spacer,
+  SubmitButton,
+  TextField,
+} from '../../components';
 import { ImageConst, RouteName } from '../../constants';
-import { Checkbox, SubmitButton, ErrorLabel, Spacer } from '../../components';
 import { hp } from '../../utils/utils';
-// import Toast from 'react-native-simple-toast';
-import KeyboardScrollView from '../../components/common/KeyboardScrollView';
 
 const LoginScreenComponent = ({ formik, navigation }) => {
   const password = useRef(null);
@@ -33,35 +30,28 @@ const LoginScreenComponent = ({ formik, navigation }) => {
         <Text style={styles.loginText}>Please Login Here</Text>
       </View>
       <View style={styles.box2}>
-        <TextInput
+        <TextField
           style={styles.inputStyle}
-          name="email"
-          placeholder="Enter your email"
+          name="username"
+          placeholder="Enter your username"
           autoCapitalize="none"
-          autoCompleteType="email"
-          keyboardType="email-address"
-          keyboardAppearance="dark"
+          keyboardType="default"
           returnKeyType="next"
           returnKeyLabel="next"
-          onChangeText={handleChange('email')}
-          onBlur={handleBlur('email')}
-          error={errors.email}
-          touch={touched.email}
+          onChangeText={handleChange('username')}
+          onBlur={handleBlur('username')}
+          error={errors.username}
+          touch={touched.username}
           onSubmitEditing={() => password.current?.focus()}
         />
-        {errors.email && touched.email ? (
-          <ErrorLabel msg={errors.email} />
-        ) : null}
         <Spacer height={10} />
-        <TextInput
-          ref={password}
+        <TextField
+          refKey={password}
           style={styles.inputStyle}
           name="password"
           placeholder="Enter your password"
           secureTextEntry
-          autoCompleteType="password"
           autoCapitalize="none"
-          keyboardAppearance="dark"
           returnKeyType="go"
           returnKeyLabel="go"
           onChangeText={handleChange('password')}
@@ -69,9 +59,6 @@ const LoginScreenComponent = ({ formik, navigation }) => {
           error={errors.password}
           touch={touched.password}
         />
-        {errors.password && touched.password ? (
-          <ErrorLabel msg={errors.password} />
-        ) : null}
         <Spacer height={10} />
         <Checkbox
           value={values?.isRemember}
@@ -123,7 +110,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   inputStyle: {
-    borderBottomWidth: 1,
+    //borderBottomWidth: 1,
     marginHorizontal: 10,
   },
   imgStyle: {

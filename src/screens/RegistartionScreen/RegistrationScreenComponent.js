@@ -1,20 +1,12 @@
 import React, { useRef } from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { ImageConst, RouteName } from '../../constants';
-import {
-  SubmitButton,
-  ErrorLabel,
-  Spacer,
   KeyboardScrollView,
+  Spacer,
+  SubmitButton,
+  TextField,
 } from '../../components';
-// import Toast from 'react-native-simple-toast';
+import { ImageConst, RouteName } from '../../constants';
 
 const RegistrationScreenComponent = ({ formik, navigation }) => {
   const password = useRef(null);
@@ -27,13 +19,11 @@ const RegistrationScreenComponent = ({ formik, navigation }) => {
         <Text style={styles.loginText}>Create a free account</Text>
       </View>
       <View style={styles.box2}>
-        <TextInput
-          style={styles.inputStyle}
+        <TextField
           name="userName"
           placeholder="Enter your username"
           autoCompleteType="userName"
           autoCapitalize="none"
-          keyboardAppearance="dark"
           returnKeyType="next"
           returnKeyLabel="next"
           onChangeText={handleChange('userName')}
@@ -41,17 +31,12 @@ const RegistrationScreenComponent = ({ formik, navigation }) => {
           error={errors.userName}
           touch={touched.userName}
         />
-        {errors.userName && touched.userName ? (
-          <ErrorLabel msg={errors.userName} />
-        ) : null}
         <Spacer />
-        <TextInput
-          style={styles.inputStyle}
+        <TextField
           name="firstName"
           placeholder="Enter your firstname"
           autoCompleteType="firstName"
           autoCapitalize="none"
-          keyboardAppearance="dark"
           returnKeyType="next"
           returnKeyLabel="next"
           onChangeText={handleChange('firstName')}
@@ -59,17 +44,12 @@ const RegistrationScreenComponent = ({ formik, navigation }) => {
           error={errors.firstName}
           touch={touched.firstName}
         />
-        {errors.firstName && touched.firstName ? (
-          <ErrorLabel msg={errors.firstName} />
-        ) : null}
         <Spacer />
-        <TextInput
-          style={styles.inputStyle}
+        <TextField
           name="lastName"
           placeholder="Enter your lastname"
           autoCompleteType="lastName"
           autoCapitalize="none"
-          keyboardAppearance="dark"
           returnKeyType="next"
           returnKeyLabel="next"
           onChangeText={handleChange('lastName')}
@@ -77,18 +57,13 @@ const RegistrationScreenComponent = ({ formik, navigation }) => {
           error={errors.lastName}
           touch={touched.lastName}
         />
-        {errors.lastName && touched.lastName ? (
-          <ErrorLabel msg={errors.lastName} />
-        ) : null}
         <Spacer />
-        <TextInput
-          style={styles.inputStyle}
+        <TextField
           name="email"
           placeholder="Enter your email"
           autoCapitalize="none"
           autoCompleteType="email"
           keyboardType="email-address"
-          keyboardAppearance="dark"
           returnKeyType="next"
           returnKeyLabel="next"
           onChangeText={handleChange('email')}
@@ -97,19 +72,14 @@ const RegistrationScreenComponent = ({ formik, navigation }) => {
           touch={touched.email}
           onSubmitEditing={() => password.current?.focus()}
         />
-        {errors.email && touched.email ? (
-          <ErrorLabel msg={errors.email} />
-        ) : null}
         <Spacer />
-        <TextInput
-          ref={password}
-          style={styles.inputStyle}
+        <TextField
+          refKey={password}
           name="password"
           placeholder="Enter your password"
           secureTextEntry
           autoCompleteType="password"
           autoCapitalize="none"
-          keyboardAppearance="dark"
           returnKeyType="go"
           returnKeyLabel="go"
           onChangeText={handleChange('password')}
@@ -117,15 +87,9 @@ const RegistrationScreenComponent = ({ formik, navigation }) => {
           error={errors.password}
           touch={touched.password}
         />
-        {errors.password && touched.password ? (
-          <ErrorLabel msg={errors.password} />
-        ) : null}
+
         <Spacer height={10} />
-        <SubmitButton
-          // disabled={!isValid}
-          label="Register"
-          onPress={handleSubmit}
-        />
+        <SubmitButton label="Register" onPress={handleSubmit} />
         <Spacer />
         <View style={styles.registerRow}>
           <Text>Already have account ? </Text>

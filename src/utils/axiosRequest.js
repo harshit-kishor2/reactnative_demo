@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { navigate } from '../navigation/SideMenu/rootNavigator';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RouteName } from '../constants';
 import { BASE_URL } from './config';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const axiosRequest = axios.create({
   baseURL: BASE_URL,
 });
@@ -14,10 +13,10 @@ axiosRequest.interceptors.response.use(
     return response.data;
   },
   error => {
-    console.log('Error=======>', error.response.data);
+    console.log('Error=======>', error.response?.data);
     if (error.response) {
       if (error.response.status === 403) {
-        navigate(RouteName.LOGOUT, { tokenExpired: true });
+        //navigate(RouteName.LOGOUT, { tokenExpired: true });
       } else {
         return new Promise((resolve, reject) => {
           reject(error.response);
@@ -31,9 +30,9 @@ axiosRequest.interceptors.response.use(
 // All request from axios
 axiosRequest.interceptors.request.use(
   async config => {
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem('@token');
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${JSON.parse(token)}`;
     }
     return config;
   },
