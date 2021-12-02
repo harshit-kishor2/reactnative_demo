@@ -2,6 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Screen from '../screens';
 import { RouteName } from '../constants';
+import { Icons } from '../components';
 
 const HomeNavigator = () => {
   const HomeStack = createNativeStackNavigator();
@@ -9,7 +10,7 @@ const HomeNavigator = () => {
   //For animation
   const horizontalAnimation = {
     gestureDirection: 'horizontal',
-    headerShown: false,
+    headerShown: true,
     cardStyleInterpolator: ({ current, layouts }) => {
       return {
         cardStyle: {
@@ -33,6 +34,10 @@ const HomeNavigator = () => {
       <HomeStack.Screen
         name={RouteName.DASHBOARD}
         component={Screen.DashboardScreen}
+      />
+      <HomeStack.Screen
+        name={RouteName.CREATE_CONTACT}
+        component={Screen.CreateContact}
       />
     </HomeStack.Navigator>
   );

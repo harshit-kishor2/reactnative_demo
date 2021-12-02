@@ -17,6 +17,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen
         name={RouteName.HOME_NAVIGATOR}
         component={HomeNavigator}
+        options={{ headerShown: false }}
       />
     </Drawer.Navigator>
   );

@@ -31,8 +31,7 @@ export const checkAuthAction = createAsyncThunk(
   async (params, thunkAPI) => {
     try {
       const token = await AsyncStorage.getItem('@token');
-      const isRemember = await AsyncStorage.getItem('@isRemember');
-      if (token && isRemember === 'true') {
+      if (token) {
         return true;
       }
       return false;

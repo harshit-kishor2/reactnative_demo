@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { navigate } from '../navigation/SideMenu/rootNavigator';
-import { RouteName } from '../constants';
 import { BASE_URL } from './config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const axiosRequest = axios.create({
@@ -10,6 +8,7 @@ const axiosRequest = axios.create({
 //All response from axios
 axiosRequest.interceptors.response.use(
   response => {
+    console.log('Response=======>', response);
     return response.data;
   },
   error => {
@@ -32,7 +31,7 @@ axiosRequest.interceptors.request.use(
   async config => {
     const token = await AsyncStorage.getItem('@token');
     if (token) {
-      config.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },

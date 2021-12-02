@@ -17,10 +17,6 @@ const AuthNavigator = () => {
         name={RouteName.REGISTRATION}
         component={Screens.RegisterScreen}
       />
-      <AuthStack.Screen
-        name={RouteName.HOME_NAVIGATOR}
-        component={Screens.DashboardScreen}
-      />
     </AuthStack.Navigator>
   );
 };

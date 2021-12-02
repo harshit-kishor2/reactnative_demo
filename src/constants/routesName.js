@@ -6,5 +6,6 @@ const routesName = {
   FORGOTPASSWORD: 'Forgot Password',
   SPLASH: 'Splash Screen',
   LOGOUT: 'Logout',
+  CREATE_CONTACT: 'Create Contact',
 };
 export default routesName;
