@@ -1,16 +1,15 @@
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Icons } from '../../components';
+import { Container, Icons, Loader } from '../../components';
 import { contactListAction } from '../../redux/contact.slice';
 import DashboardCompnent from './DashboardCompnent';
-import { Loader } from '../../components';
 import FloatingButton from './FloatingButton';
-import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 const DashboardScreen = () => {
   const dispatch = useDispatch();
-
+  const isFocused = useIsFocused();
   const { setOptions, toggleDrawer } = useNavigation();
   const [listData, setlistData] = useState([
     { id: 1, name: 'Harshit1' },
@@ -23,11 +22,11 @@ const DashboardScreen = () => {
 
   useEffect(() => {
     dispatch(contactListAction());
-  }, [dispatch]);
+  }, [dispatch, isFocused]);
 
-  /*   useEffect(() => {
+  useEffect(() => {
     setlistData(contactList);
-  }, [contactList]); */
+  }, [contactList]);
 
   React.useEffect(() => {
     setOptions({

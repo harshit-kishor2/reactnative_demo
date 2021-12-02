@@ -17,7 +17,10 @@ const DashboardCompnent = ({ listData = [] }) => {
   const _renderItem = ({ item }) => {
     return (
       <View style={{ margin: 5, paddingVertical: 10, flex: 1 }}>
-        <Text>{item.name}</Text>
+        <Text>
+          {item.first_name} {item.last_name}
+        </Text>
+        <Text>{item.phone_number}</Text>
       </View>
     );
   };

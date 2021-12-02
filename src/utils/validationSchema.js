@@ -18,3 +18,11 @@ export const RegisterationSchema = Yup.object({
   lastName: Yup.string().required('Last Name required.'),
   userName: Yup.string().required('User Name required.'),
 });
+
+// ! Validation for Contact form
+export const createContactSchema = Yup.object({
+  country_code: Yup.string().required('Country Code required.'),
+  first_name: Yup.string().required('First Name required.'),
+  last_name: Yup.string().required('Last Name required.'),
+  phone_number: Yup.string().required('Phone Number required.'),
+});

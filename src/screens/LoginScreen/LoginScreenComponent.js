@@ -38,7 +38,7 @@ const LoginScreenComponent = ({ formik, navigation }) => {
           iconPosition="right"
           style={styles.inputStyle}
           name="username"
-          placeholder="Enter your username"
+          placeholder="Enter your username- guf7fu"
           autoCapitalize="none"
           keyboardType="default"
           returnKeyType="next"
@@ -64,7 +64,7 @@ const LoginScreenComponent = ({ formik, navigation }) => {
           refKey={password}
           style={styles.inputStyle}
           name="password"
-          placeholder="Enter your password"
+          placeholder="Enter your password- 12345678"
           secureTextEntry={hidePass}
           autoCapitalize="none"
           returnKeyType="go"
