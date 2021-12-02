@@ -11,11 +11,7 @@ const DashboardScreen = () => {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
   const { setOptions, toggleDrawer } = useNavigation();
-  const [listData, setlistData] = useState([
-    { id: 1, name: 'Harshit1' },
-    { id: 2, name: 'Harshit2' },
-    { id: 3, name: 'Harshit3' },
-  ]);
+  const [listData, setlistData] = useState(contactList);
   const { contactLoadingStatus, contactList } = useSelector(
     state => state.contactReducer,
   );

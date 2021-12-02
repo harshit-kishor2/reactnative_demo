@@ -12,7 +12,7 @@ export const contactAdapter = createEntityAdapter();
 export const initialContactState = contactAdapter.getInitialState({
   contactLoadingStatus: 'not loaded',
   createContactLoadingStatus: 'not loaded',
-  contactList: null,
+  contactList: [],
   contactError: null,
   createContactError: null,
 });
