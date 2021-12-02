@@ -10,7 +10,8 @@ import { ImageConst, RouteName } from '../../constants';
 
 const RegistrationScreenComponent = ({ formik, navigation }) => {
   const password = useRef(null);
-  const { handleChange, handleBlur, errors, touched, handleSubmit } = formik;
+  const { handleChange, handleBlur, values, errors, touched, handleSubmit } =
+    formik;
   return (
     <KeyboardScrollView style={styles.container}>
       <View style={styles.box1}>
@@ -21,6 +22,7 @@ const RegistrationScreenComponent = ({ formik, navigation }) => {
       <View style={styles.box2}>
         <TextField
           name="userName"
+          value={values.userName}
           placeholder="Enter your username"
           autoCompleteType="userName"
           autoCapitalize="none"
@@ -34,6 +36,7 @@ const RegistrationScreenComponent = ({ formik, navigation }) => {
         <Spacer />
         <TextField
           name="firstName"
+          value={values.firstName}
           placeholder="Enter your firstname"
           autoCompleteType="firstName"
           autoCapitalize="none"
@@ -47,6 +50,7 @@ const RegistrationScreenComponent = ({ formik, navigation }) => {
         <Spacer />
         <TextField
           name="lastName"
+          value={values.lastName}
           placeholder="Enter your lastname"
           autoCompleteType="lastName"
           autoCapitalize="none"
@@ -60,6 +64,7 @@ const RegistrationScreenComponent = ({ formik, navigation }) => {
         <Spacer />
         <TextField
           name="email"
+          value={values.email}
           placeholder="Enter your email"
           autoCapitalize="none"
           autoCompleteType="email"
@@ -76,6 +81,7 @@ const RegistrationScreenComponent = ({ formik, navigation }) => {
         <TextField
           refKey={password}
           name="password"
+          value={values.password}
           placeholder="Enter your password"
           secureTextEntry
           autoCompleteType="password"

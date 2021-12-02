@@ -80,6 +80,7 @@ const CreateContactComponant = ({ formik, navigation }) => {
           placeholder="Enter your phone_number"
           autoCompleteType="phone_number"
           autoCapitalize="none"
+          keyboardType="number-pad"
           returnKeyType="next"
           returnKeyLabel="next"
           onChangeText={handleChange('phone_number')}

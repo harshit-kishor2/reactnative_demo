@@ -23,7 +23,7 @@ const RegisterScreen = ({ navigation }) => {
       lastName: '',
       userName: '',
     },
-    onSubmit: value => {
+    onSubmit: (value, { resetForm }) => {
       let data = {
         username: value.userName,
         first_name: value.firstName,
@@ -35,6 +35,7 @@ const RegisterScreen = ({ navigation }) => {
         if (res.type === 'auth/registerAction/rejected') {
           Toast.show('Some Error Occured.');
         } else {
+          resetForm();
           navigation.navigate(routesName.LOGIN);
         }
       });
