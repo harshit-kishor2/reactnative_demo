@@ -63,25 +63,4 @@ A new React Native project.
 # Folder Structure
 
 make a src forlder in root folder and move app.js file in this
-
-/src
-  ./assets
-     ./images
-     ./icons
-     ./fonts
-  ./componants
-      ./common
-      -index.js
-  ./constants
-      -colors.js
-      -icons.js
-      -images.js
-      -index.js
-      -routesName.js
-      -string.js
-   ./navigation
-   ./redux
-   ./screens
-   ./utils
-   -App.js
-   -store.js
+![alt text](https://github.com/harshit-kishor2/reactnative_demo/blob/main/src/assets/images/Screenshot%20at%202021-12-09%2010-25-22.png)
